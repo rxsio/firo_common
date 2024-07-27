@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16.3...3.28.1)
+cmake_minimum_required(VERSION 3.22.1...3.30.1)
 project(firo_common)
-find_package(catkin REQUIRED)
-catkin_metapackage()
+find_package(ament_cmake REQUIRED)
+ament_package()
