@@ -1,4 +1,0 @@
-<launch>
-    <rosparam file="$(find firo_calibration)/kalibr/camimu/inflated/camimu-camchain-imucam.yaml" command="load" ns="/calibration"/>
-    <rosparam file="$(find firo_calibration)/kalibr/camimu/inflated/camimu-imu.yaml" command="load" ns="/calibration"/>
-</launch>
