@@ -55,7 +55,7 @@
 
   <ros2_control name="GazeboSimSystem" type="system">
     <hardware>
-      <plugin>libgazebo_ros_control.so</plugin>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
     </hardware>
     <joint name="front_right_wheel_joint">
       <command_interface name="velocity">
@@ -107,6 +107,7 @@
     <gazebo>
       <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
         <hold_joints>true</hold_joints>
+        <parameters>$(find firo_control)/config/controllers.yaml</parameters>
       </plugin>
     </gazebo>
     <plugin name="p3d_plugin" filename="libgazebo_ros_p3d.so">

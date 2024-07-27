@@ -3,13 +3,14 @@
   <name>firo_control</name>
   <version>1.0.0</version>
   <description>FIRO controllers</description>
-
   <maintainer email="gabriel@gabrielb.dev">Gabriel Brzeziński</maintainer>
-
   <license>Apache-2.0</license>
 
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <buildtool_depend>catkin</buildtool_depend>
   <exec_depend>controller_manager</exec_depend>
 
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

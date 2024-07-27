@@ -1,10 +1,4 @@
 <launch>
-    <rosparam file="$(find firo_control)/config/controllers.yaml" command="load"/>
-
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/"
-        args="
-             /firo/controller/wheels_left_state
-             /firo/controller/wheels_right_state
-             /firo/controller/wheels
-    "/>
+    <node name="joint_state_broadcaster" pkg="controller_manager" exec="spawner" args="joint_state_broadcaster" />
+    <node name="diff_drive_controller" pkg="controller_manager" exec="spawner" args="diff_drive_controller" />
 </launch>
