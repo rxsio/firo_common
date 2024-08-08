@@ -104,19 +104,20 @@
   </ros2_control>
 
   <gazebo>
-    <gazebo>
-      <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-        <hold_joints>true</hold_joints>
-        <parameters>$(find firo_control)/config/controllers.yaml</parameters>
-      </plugin>
-    </gazebo>
-    <plugin name="p3d_plugin" filename="libgazebo_ros_p3d.so">
+    <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <hold_joints>true</hold_joints>
+      <parameters>$(find firo_control)/config/controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+  <gazebo>
+    <!-- <plugin name="p3d_plugin" filename="libgazebo_ros_p3d.so">
       <ros>
         <remapping>odom:=ground_truth</remapping>
       </ros>
       <update_rate>100.0</update_rate>
       <body_name>base_link</body_name>
       <frame_name>map</frame_name>
-    </plugin>
+    </plugin> -->
+    <!-- <plugin filename="libgz_ros"/ -->
   </gazebo>
 </robot>

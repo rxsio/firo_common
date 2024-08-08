@@ -74,41 +74,54 @@
     </joint>
 
     <!-- Stereo and depth camera -->
-    <gazebo reference="${prefix}_right_camera_optical">
+    <gazebo reference="${prefix}_left_camera">
+      <sensor type="camera" name="${prefix}_stereo_camera_left">
+        <always_on>true</always_on>
+        <update_rate>${stereo_fps}</update_rate>
+        <visualize>false</visualize>
+        <topic>/${prefix}_camera/left/image_rect</topic>
+        <gz_frame_id>${prefix}_left_camera_optical</gz_frame_id>
+        <camera name="left">
+          <camera_info_topic>/${prefix}_camera/left/camera_info</camera_info_topic>
+          <horizontal_fov>${2*atan2(calibration.cam0.resolution[0], calibration.cam0.intrinsics[0] + calibration.cam0.intrinsics[1])}</horizontal_fov>
+          <image>
+            <width>${calibration.cam0.resolution[0]}</width>
+            <height>${calibration.cam0.resolution[1]}</height>
+            <format>L8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+          <lens>
+            <intrinsics>
+              <fx>${(calibration.cam0.intrinsics[0] + calibration.cam0.intrinsics[1])/2}</fx>
+              <fy>${(calibration.cam0.intrinsics[0] + calibration.cam0.intrinsics[1])/2}</fy>
+              <cx>${calibration.cam0.intrinsics[2]}</cx>
+              <cy>${calibration.cam0.intrinsics[3]}</cy>
+              <s>0</s>
+            </intrinsics>
+            <scale_to_hfov>false</scale_to_hfov>
+          </lens>
+        </camera>
+
+      </sensor>
+
+    </gazebo>
+    <gazebo reference="${prefix}_right_camera">
       <sensor type="multicamera" name="${prefix}_stereo_camera">
         <always_on>true</always_on>
         <update_rate>${stereo_fps}</update_rate>
         <visualize>false</visualize>
-        <camera name="left">
-          <pose>${calibration.cam1.T_cn_cnm1[0][3]} ${calibration.cam1.T_cn_cnm1[1][3]} ${calibration.cam1.T_cn_cnm1[2][3] - optical_offset_x} ${atan2(calibration.cam1.T_cn_cnm1[2][1],calibration.cam1.T_cn_cnm1[2][2]) + pi/2} ${atan2(-calibration.cam1.T_cn_cnm1[2][0],sqrt(calibration.cam1.T_cn_cnm1[2][1]**2 + calibration.cam1.T_cn_cnm1[2][2]**2)) - pi/2} ${atan2(calibration.cam1.T_cn_cnm1[1][0],calibration.cam1.T_cn_cnm1[0][0])}</pose>
-          <horizontal_fov>${2*atan2(calibration.cam0.resolution[0], calibration.cam0.intrinsics[0] + calibration.cam0.intrinsics[1])}</horizontal_fov>
-          <image>
-            <width>${calibration.cam0.resolution[0]}</width>
-            <height>${calibration.cam0.resolution[1]}</height>
-            <format>L8</format>
-          </image>
-          <clip>
-            <near>0.02</near>
-            <far>300</far>
-          </clip>
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.007</stddev>
-          </noise>
-          <lens>
-            <intrinsics>
-              <fx>${(calibration.cam0.intrinsics[0] + calibration.cam0.intrinsics[1])/2}</fx>
-              <fy>${(calibration.cam0.intrinsics[0] + calibration.cam0.intrinsics[1])/2}</fy>
-              <cx>${calibration.cam0.intrinsics[2]}</cx>
-              <cy>${calibration.cam0.intrinsics[3]}</cy>
-              <s>0</s>
-            </intrinsics>
-            <scale_to_hfov>false</scale_to_hfov>
-          </lens>
-        </camera>
+        <topic>/${prefix}_camera/right/image_rect</topic>
+        <gz_frame_id>${prefix}_right_camera_optical</gz_frame_id>
         <camera name="right">
-          <pose>0 0 ${-optical_offset_x} ${pi/2} ${-pi/2} 0</pose>
+          <camera_info_topic>/${prefix}_camera/right/camera_info</camera_info_topic>
           <horizontal_fov>${2*atan2(calibration.cam0.resolution[0], calibration.cam0.intrinsics[0] + calibration.cam0.intrinsics[1])}</horizontal_fov>
           <image>
             <width>${calibration.cam0.resolution[0]}</width>
@@ -135,16 +148,6 @@
             <scale_to_hfov>false</scale_to_hfov>
           </lens>
         </camera>
-        <plugin name="stereo_camera_plugin" filename="libgazebo_ros_camera.so">
-          <ros>
-            <namespace>/${prefix}_camera</namespace>
-            <remapping>left/image_raw:=left/image_rect</remapping>
-            <remapping>right/image_raw:=right/image_rect</remapping>
-          </ros>
-          <frame_name>${prefix}_left_camera_optical</frame_name>
-          <right_frame_name>${prefix}_right_camera_optical</right_frame_name>          <!-- TODO -->
-          <hack_baseline>${baseline}</hack_baseline>
-        </plugin>
       </sensor>
 
     </gazebo>
@@ -154,7 +157,10 @@
         <always_on>true</always_on>
         <update_rate>${stereo_fps}</update_rate>
         <visualize>false</visualize>
+        <topic>/${prefix}_camera/depth_registered/image</topic>
+        <gz_frame_id>${prefix}_rgb_camera_optical</gz_frame_id>
         <camera name="/${prefix}_camera/depth">
+          <camera_info_topic>/${prefix}_camera/depth_registered/camera_info</camera_info_topic>
           <horizontal_fov>${2*atan2(calibration.cam0.resolution[0], calibration.cam0.intrinsics[0] + calibration.cam0.intrinsics[1])}</horizontal_fov>
           <image>
             <width>${calibration.cam0.resolution[0]}</width>
@@ -180,22 +186,14 @@
             </intrinsics>
             <scale_to_hfov>false</scale_to_hfov>
           </lens>
+          <depth_camera>
+            <output>depth</output>
+            <clip>
+              <near>0.35</near>
+              <far>35.0</far>
+            </clip>
+          </depth_camera>
         </camera>
-        <plugin name="depth_camera_plugin" filename="libgazebo_ros_camera.so">
-          <ros>
-            <namespace>/${prefix}_camera</namespace>
-            <remapping>image_raw:=rgb/image_rect_color</remapping>
-            <remapping>camera_info:=rgb/camera_info</remapping>
-            <remapping>image_depth:=depth_registered/image</remapping>
-            <remapping>camera_info_depth:=depth_registered/camera_info</remapping>
-            <remapping>points:=depth_registered/points</remapping>
-          </ros>
-          <min_depth>0.35</min_depth>
-          <max_depth>35.0</max_depth>
-          <frame_name>${prefix}_rgb_camera_optical</frame_name>
-          <baseline>${baseline}</baseline>
-          <hack_baseline>0.0</hack_baseline>
-        </plugin>
       </sensor>
     </gazebo>
 
@@ -204,6 +202,8 @@
       <sensor type="imu" name="imu_sensor">
         <always_on>true</always_on>
         <update_rate>${imu_frequency}</update_rate>
+
+        <topic>/${prefix}_camera/imu/data</topic>
         <imu>
           <angular_velocity>
             <x>
@@ -246,14 +246,6 @@
             </z>
           </linear_acceleration>
         </imu>
-        <plugin name="imu_sensor_plugin" filename="libgazebo_ros_imu_sensor.so">
-          <ros>
-            <namespace>/${prefix}_camera/imu</namespace>
-            <remapping>~/out:=data</remapping>
-          </ros>
-          <frame_name>${prefix}_camera_imu_link</frame_name>
-          <initial_orientation_as_reference>false</initial_orientation_as_reference>
-        </plugin>
       </sensor>
     </gazebo>
 
