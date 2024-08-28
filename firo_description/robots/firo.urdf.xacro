@@ -103,9 +103,7 @@
     </joint>
   </ros2_control> -->
 
-
-
-  <ros2_control name="odrive_can_right" type="actuator">
+  <ros2_control name="odrive_can" type="actuator">
     <hardware>
       <plugin>odrive_can_driver/OdriveHardwareInterface</plugin>
       <param name="interface">can0</param>
@@ -124,13 +122,6 @@
       <state_interface name="velocity" />
       <state_interface name="effort"/>
     </joint>
-  </ros2_control>
-
-  <ros2_control name="odrive_can_left" type="actuator">
-    <hardware>
-      <plugin>odrive_can_driver/OdriveHardwareInterface</plugin>
-      <param name="interface">can0</param>
-    </hardware>
     <joint name="back_left_wheel_joint">
       <param name="node_id">12</param>
       <command_interface name="velocity" />
