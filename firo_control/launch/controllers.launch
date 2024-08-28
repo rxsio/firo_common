@@ -1,4 +1,4 @@
 <launch>
     <node name="joint_state_broadcaster" pkg="controller_manager" exec="spawner" args="joint_state_broadcaster" />
-    <node name="diff_drive_controller" pkg="controller_manager" exec="spawner" args="diff_drive_controller" />
+    <node name="wheel_controller" pkg="controller_manager" exec="spawner" args="wheel_controller" />
 </launch>

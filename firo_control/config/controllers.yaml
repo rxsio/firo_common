@@ -5,10 +5,10 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    diff_drive_controller:
+    wheel_controller:
       type: diff_drive_controller/DiffDriveController
 
-diff_drive_controller:
+wheel_controller:
   ros__parameters:
     left_wheel_names: [front_left_wheel_joint, back_left_wheel_joint]
     right_wheel_names: [front_right_wheel_joint, back_right_wheel_joint]
