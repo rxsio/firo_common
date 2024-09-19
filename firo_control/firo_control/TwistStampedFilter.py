@@ -49,9 +49,6 @@ class TwistStampedFilterNode(Node):
         if self.latest_timestamp is None or timestamp > self.latest_timestamp:
             self.latest_timestamp = timestamp
             self.publisher.publish(msg)
-            # rclpy.loginfo(f'Published message with timestamp {timestamp}')
-        # else:
-            # rclpy.loginfo(f'Skipped message with timestamp {timestamp}')
 
 
 def main(args=None):
