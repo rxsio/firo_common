@@ -57,7 +57,7 @@
   <xacro:if value="$(arg gazebo)">
     <ros2_control name="GazeboSimSystem" type="system">
       <hardware>
-        <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        <plugin>ign_ros2_control/IgnitionSystem</plugin>
       </hardware>
       <joint name="front_right_wheel_joint">
         <command_interface name="velocity">
@@ -152,7 +152,7 @@
   </xacro:unless>
 
   <gazebo>
-    <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+    <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control::IgnitionROS2ControlPlugin">
       <hold_joints>true</hold_joints>
       <parameters>$(find firo_control)/config/controllers.yaml</parameters>
     </plugin>
