@@ -4,9 +4,10 @@
     <arg name="model" default="$(find-pkg-share firo_description)/robots/firo.urdf.xacro"/>
     <arg name="publish_frequency" default="100.0"/>
     <arg name="stereo_fps" default="30" />
+    <arg name="gazebo" default="False" />
 
     <node pkg="robot_state_publisher" exec="robot_state_publisher">
         <param name="publish_frequency" value="$(var publish_frequency)"/>
-        <param name="robot_description" value="$(command '$(exec-in-pkg xacro xacro) $(var model) calibration_path:=\'$(var camera_calibration_path)\' imu_frequency:=\'$(var imu_frequency)\' stereo_fps:=\'$(var stereo_fps)\'')"/>
+        <param name="robot_description" value="$(command '$(exec-in-pkg xacro xacro) $(var model) calibration_path:=\'$(var camera_calibration_path)\' imu_frequency:=\'$(var imu_frequency)\' stereo_fps:=\'$(var stereo_fps)\' gazebo:=\'$(var gazebo)\'')"/>
     </node>
 </launch>
