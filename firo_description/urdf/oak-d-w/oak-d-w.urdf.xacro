@@ -114,7 +114,7 @@
 
     </gazebo>
     <gazebo reference="${prefix}_right_camera">
-      <sensor type="multicamera" name="${prefix}_stereo_camera">
+      <sensor type="camera" name="${prefix}_stereo_camera">
         <always_on>true</always_on>
         <update_rate>${stereo_fps}</update_rate>
         <visualize>false</visualize>
@@ -152,8 +152,8 @@
 
     </gazebo>
     <gazebo reference="${prefix}_camera">
-      <!-- Depth image, rgb image, point cloud -->
-      <sensor type="depth" name="${prefix}_camera_depth">
+      <!-- Depth image -->
+      <sensor type="depth_camera" name="${prefix}_camera_depth">
         <always_on>true</always_on>
         <update_rate>${stereo_fps}</update_rate>
         <visualize>false</visualize>
