@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'joystick_multiplexer'
+package_name = 'firo_joy'
 
 setup(
     name=package_name,
@@ -13,11 +13,11 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='adam',
-    maintainer_email='01149057@pw.edu.pl',
-    description='Multiplexer joysticka dla ROS2',
+    maintainer='Gabriel Brzeziński',
+    maintainer_email='gabriel@gabrielb.dev',
+    description='Joy nodes for controlling FIRO robots',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
     'console_scripts': [
-        'joy_multiplexer = joystick_multiplexer.joystick_multiplexer:main'],},)
+        'joy_crossbar_switch = firo_joy.joy_crossbar_switch:main'],},)
