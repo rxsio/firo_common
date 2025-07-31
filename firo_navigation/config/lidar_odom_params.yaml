@@ -1,0 +1,53 @@
+rf2o_laser_odometry:
+  ros__parameters:
+    laser_scan_topic: "/ldlidar_node/scan"
+    odom_topic: "/odom_lidar_rf"
+    publish_tf: False
+    base_frame_id: "lidar_link"
+    odom_frame_id: "odom"
+    init_pose_from_topic: ""
+    freq: 5.0
+
+rf2o_laser_odometry_fixer:
+  ros__parameters:
+    odom_topic: "/odom_lidar_rf"
+    odom_topic_fixed: "/odom_lidar_rf_fixed"
+    covariance:
+      [
+        0.1,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9999.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9999.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9999.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1,
+      ]
