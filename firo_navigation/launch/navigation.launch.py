@@ -53,11 +53,12 @@ def generate_launch_description():
             arguments=['--ros-args', '--log-level', 'info'] 
         )
 
-    # slam toolbox node in async mode for lifecycle manager
-    slam_toolbox_node = Node(
+    # slam toolbox node in async mode
+    slam_toolbox_node = LifecycleNode(
           package='slam_toolbox',
           executable='async_slam_toolbox_node',
           name='slam_toolbox',
+          namespace='',
           output='screen',
           parameters=[slam_config_path],
           remappings=[('/pose', '/pose_slam')],
