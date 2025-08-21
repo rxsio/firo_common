@@ -65,6 +65,14 @@ def generate_launch_description():
           respawn=True,
           arguments=['--ros-args', '--log-level', 'info']         
     )
+    # twist stamper node -> humble doesnt support TS which controllers require
+    twist_stamper = Node(
+        package='twist_stamper',
+        executable='twist_stamper',
+        name='twist_stamper',
+        remappings=[('/cmd_vel_in','/cmd_vel_nav_smoothed'),
+                    ('/cmd_vel_out','/cmd_vel')]
+      )
 
     # nav2 nodes for lifecycle manager
     bt_navigator_node = Node(
@@ -83,6 +91,7 @@ def generate_launch_description():
 	    output='screen',
             parameters=[nav_config_path],
             respawn=True,
+            remappings=[('cmd_vel', 'cmd_vel_nav')],
             arguments=['--ros-args', '--log-level', 'info']
         )
     planner_server_node = Node(
@@ -110,8 +119,8 @@ def generate_launch_description():
 	    output='screen',
             parameters=[nav_config_path],
             respawn=True,
-            arguments=['--ros-args', '--log-level', 'info']
-            #remappings=[('cmd_vel', 'cmd_vel_nav')]
+            arguments=['--ros-args', '--log-level', 'info'],
+            remappings=[('cmd_vel', 'cmd_vel_nav')]
         )
     map_server_node = Node(
             package='nav2_map_server', 
@@ -146,6 +155,7 @@ def generate_launch_description():
             name='velocity_smoother',
 	    output='screen',
             parameters=[nav_config_path],
+            remappings=[('cmd_vel', 'cmd_vel_nav'), ('cmd_vel_smoothed', 'cmd_vel_nav_smoothed')],
             respawn=True,
             arguments=['--ros-args', '--log-level', 'info']
         )

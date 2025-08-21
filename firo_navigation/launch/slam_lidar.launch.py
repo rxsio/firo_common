@@ -77,7 +77,7 @@ def generate_launch_description():
         executable='static_transform_publisher',
         name='base_to_lidar',
         output='screen',
-        arguments=['0', '0', '0.1', '0', '0', '0', 'base_link', 'lidar_link']
+        arguments=['0.25', '0', '0.2', '0', '0', '0', 'base_link', 'lidar_link']
     )
     # base footprint transform
     base_to_footprint = Node(
@@ -85,7 +85,7 @@ def generate_launch_description():
         executable='static_transform_publisher',
         name='base_to_footprint',
         output='screen',
-        arguments=['0', '0', '-0.1', '0', '0', '0', 'base_link', 'base_footprint']
+        arguments=['0', '0', '-0.09', '0', '0', '0', 'base_link', 'base_footprint']
     )
 
     # RVIZ2 settings
@@ -114,7 +114,7 @@ def generate_launch_description():
     ld.add_action(slam_toolbox_node)
 
     # Launch fake odom publisher node
-    ld.add_action(fake_odom)
+    #ld.add_action(fake_odom)
 
     # Launch fake footprint publisher node
     ld.add_action(base_to_footprint)
