@@ -54,13 +54,13 @@ ekf_filter_node_odom:
         false,
         false,
 
-        true,
+        false,
         false,
         false,
 
         false,
         false,
-        true,
+        false,
 
         false,
         false,
@@ -68,7 +68,7 @@ ekf_filter_node_odom:
       ]
     odom1_queue_size: 10
     odom1_nodelay: true
-    odom1_differential: true
+    odom1_differential: false
     odom1_relative: false
 
     ##### imu odometry TODO
@@ -647,13 +647,13 @@ ekf_filter_node_map:
         false,
         false,
 
-        true,
+        false,
         false,
         false,
 
         false,
         false,
-        true,
+        false,
 
         false,
         false,
@@ -661,7 +661,7 @@ ekf_filter_node_map:
       ]
     odom1_queue_size: 10
     odom1_nodelay: true
-    odom1_differential: true
+    odom1_differential: false
     odom1_relative: false
 
     ##### imu odometry TODO

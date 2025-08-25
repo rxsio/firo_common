@@ -11,7 +11,7 @@ def generate_launch_description():
     odom_config_path = os.path.join(
         get_package_share_directory('firo_navigation'),
         'config',
-        'lidar_odom_params.yaml'
+        'lidar_odometry_params.yaml'
     )
 
     lidar_odom_node = Node(

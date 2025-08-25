@@ -47,7 +47,7 @@ def generate_launch_description():
         executable='static_transform_publisher',
         name='base_to_lidar',
         output='screen',
-        arguments=['0.25', '0', '0.2', '0', '0', '0', 'base_link', 'lidar_link']
+        arguments=['0.265', '0', '0.055', '0', '0', '0', 'torso', 'lidar_link']
     )
     # base footprint transform
     base_to_footprint = Node(
@@ -69,7 +69,7 @@ def generate_launch_description():
     #ld.add_action(fake_odom)
 
     # Launch fake footprint publisher node
-    ld.add_action(base_to_footprint)
+    #ld.add_action(base_to_footprint)
 
     # Launch static transfrom publisher nodes
     ld.add_action(base_to_lidar)

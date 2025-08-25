@@ -88,9 +88,9 @@ behavior_server:
     robot_base_frame: base_link
     transform_tolerance: 0.1
     simulate_ahead_time: 2.0
-    max_rotational_vel: 0.8
-    min_rotational_vel: 0.4
-    rotational_acc_lim: 2.0
+    max_rotational_vel: 0.1
+    min_rotational_vel: 0.05
+    rotational_acc_lim: 1.0
 
 planner_server:
   ros__parameters:
@@ -109,17 +109,17 @@ planner_server:
       analytic_expansion_max_length: 3.0 # For Hybrid/Lattice nodes The maximum length of the analytic expansion to be considered valid to prevent unsafe shortcutting
       analytic_expansion_max_cost: 200.0 # The maximum single cost for any part of an analytic expansion to contain and be valid, except when necessary on approach to goal
       analytic_expansion_max_cost_override: false #  Whether or not to override the maximum cost setting if within critical distance to goal (ie probably required)
-      reverse_penalty: 1.05 # Penalty to apply if motion is reversing, must be => 1
+      reverse_penalty: 1.5 # Penalty to apply if motion is reversing, must be => 1
       change_penalty: 0.05 # Penalty to apply if motion is changing directions (L to R), must be >= 0
       non_straight_penalty: 1.5 # Penalty to apply if motion is non-straight, must be => 1
       cost_penalty: 2.0 # Penalty to apply to higher cost areas when adding into the obstacle map dynamic programming distance expansion heuristic. This drives the robot more towards the center of passages. A value between 1.3 - 3.5 is reasonable.
-      rotation_penalty: 0.5 # Penalty to apply to in-place rotations, if minimum control set contains them
+      rotation_penalty: 0.2 # Penalty to apply to in-place rotations, if minimum control set contains them
       retrospective_penalty: 0.015 # Causes State Lattice to prefer later maneuvers, must be <1.0
       #lattice_filepath: "$(find firo_navigation)/config/navigation_primitives.json" # The filepath to the state lattice graph -> else use default
       lattice_filepath: "/ros2/install/firo_navigation/share/firo_navigation/config/navigation_primitives.json"
       lookup_table_size: 20.0 # Size of the dubin/reeds-sheep distance window to cache, in meters.
       cache_obstacle_heuristic: false # Cache the obstacle map dynamic programming distance expansion heuristic between subsequent replannings of the same goal location. Dramatically speeds up replanning performance (40x) if costmap is largely static.
-      allow_reverse_expansion: false # If true, allows the robot to use the primitives to expand in the mirrored opposite direction of the current robot's orientation (to reverse).
+      allow_reverse_expansion: true # If true, allows the robot to use the primitives to expand in the mirrored opposite direction of the current robot's orientation (to reverse).
       coarse_search_resolution: 1 # Number of bins to skip when doing a coarse search for the path. Only used for all_direction goal heading mode.
       goal_heading_mode: "DEFAULT" # DEFAULT, BIDIRECTIONAL, ALL_DIRECTION
       smooth_path: true # If true, does a simple and quick smoothing post-processing to the path
@@ -184,8 +184,8 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.25
-      yaw_goal_tolerance: 0.25
+      xy_goal_tolerance: 0.1
+      yaw_goal_tolerance: 0.1
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
       time_steps: 28
@@ -194,10 +194,10 @@ controller_server:
       vx_std: 0.2
       vy_std: 0.2
       wz_std: 0.2
-      vx_max: 0.25
-      vx_min: -0.25
+      vx_max: 0.1
+      vx_min: -0.1
       vy_max: 0.0
-      wz_max: 1.0
+      wz_max: 0.15
       ax_max: 0.05
       ax_min: -0.05
       ay_min: 0.0
@@ -413,8 +413,8 @@ velocity_smoother:
     smoothing_frequency: 20.0
     scale_velocities: false
     feedback: "OPEN_LOOP"
-    max_velocity: [0.25, 0.0, 1.0]
-    min_velocity: [-0.25, 0.0, -1.0]
+    max_velocity: [0.25, 0.0, 0.25]
+    min_velocity: [-0.25, 0.0, -0.25]
     deadband_velocity: [0.0, 0.0, 0.0]
     velocity_timeout: 1.0
     max_accel: [0.05, 0.0, 0.5]
@@ -438,7 +438,7 @@ collision_monitor:
     polygons: ["PolygonStop", "PolygonSlow"]
     PolygonStop:
       type: "polygon"
-      points: [0.445, 0.2725, -0.395, 0.2725, -0.395, -0.2725, 0.445, -0.2725]
+      points: [0.395, 0.2725, -0.395, 0.2725, -0.395, -0.2725, 0.395, -0.2725]
       action_type: "stop"
       max_points: 3
       visualize: true
@@ -446,13 +446,13 @@ collision_monitor:
       enabled: true
     PolygonSlow:
       type: "polygon"
-      points: [0.645, 0.4725, -0.595, 0.4725, -0.595, -0.4725, 0.645, -0.4725]
+      points: [0.545, 0.3725, -0.495, 0.3725, -0.495, -0.3725, 0.545, -0.3725]
       action_type: "slowdown"
       max_points: 3
       slowdown_ratio: 0.4
       visualize: true
       polygon_pub_topic: "polygon_slowdown"
-      enabled: true
+      enabled: false
     observation_sources: ["scan"]
     scan:
       source_timeout: 0.2

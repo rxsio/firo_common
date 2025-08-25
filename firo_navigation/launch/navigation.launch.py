@@ -180,14 +180,37 @@ def generate_launch_description():
         arguments=['--ros-args', '--log-level', 'info']
     )
 
+    # temp 
+    # lidar base transform
+    base_to_lidar = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='base_to_lidar',
+        output='screen',
+        arguments=['0.265', '0', '0.055', '0', '0', '0', 'torso', 'lidar_link']
+    )
+    # base footprint transform
+    base_to_footprint = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='base_to_footprint',
+        output='screen',
+        arguments=['0', '0', '-0.09', '0', '0', '0', 'base_link', 'base_footprint']
+    )
+
 
     # Define LaunchDescription variable
     ld = LaunchDescription()
+
+    #temp
+    ld.add_action(base_to_lidar)
+    ld.add_action(base_to_footprint)
 
     # launch nodes
     ld.add_action(local_localization_node)
     ld.add_action(global_localization_node)
     ld.add_action(slam_toolbox_node)
+    ld.add_action(twist_stamper)
     # nav2 nodes
     ld.add_action(bt_navigator_node)
     ld.add_action(behavior_server_node)
