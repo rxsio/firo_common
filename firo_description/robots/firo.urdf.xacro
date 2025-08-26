@@ -54,6 +54,16 @@
   <xacro:joint child="back_left_wheel" xyz="${-mechanical.wheel_base/2} ${mechanical.wheel_track/2} ${mechanical.wheel_radius}" type="continuous" axis="0 1 0" limit_effort="7.5" limit_velocity="7.5"/>
   <xacro:joint parent="torso" child="front_camera" xyz="0.3001 0 0.12845"/>
 
+  <link name="lidar_link"/>
+  <xacro:joint parent="torso" child="lidar_link" xyz="0.265 0 0.055" rpy="0 0 0"/>
+
+  <link name="imu_link"/>
+  <xacro:joint parent="torso" child="imu_link" xyz="0 0 0.023" rpy="0 0 0"/>
+
+  <link name="base_footprint"/>
+  <xacro:joint parent="base_link" child="base_footprint" xyz="0 0 -0.09" rpy="0 0 0"/>
+
+
   <xacro:if value="$(arg gazebo)">
     <ros2_control name="GazeboSimSystem" type="system">
       <hardware>
