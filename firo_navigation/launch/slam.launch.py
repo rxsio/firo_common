@@ -49,6 +49,14 @@ def generate_launch_description():
         output='screen',
         arguments=['0.265', '0', '0.055', '0', '0', '0', 'torso', 'lidar_link']
     )
+    # imu base transform
+    base_to_imu = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='base_to_imu',
+        output='screen',
+        arguments=['0.025', '0', '0.023', '0', '0', '0', 'torso', 'imu_link']
+    )
     # base footprint transform
     base_to_footprint = Node(
         package='tf2_ros',
@@ -68,10 +76,9 @@ def generate_launch_description():
     # Launch fake odom publisher node
     #ld.add_action(fake_odom)
 
-    # Launch fake footprint publisher node
-    #ld.add_action(base_to_footprint)
-
     # Launch static transfrom publisher nodes
     ld.add_action(base_to_lidar)
+    ld.add_action(base_to_imu)
+    ld.add_action(base_to_footprint)
 
     return ld

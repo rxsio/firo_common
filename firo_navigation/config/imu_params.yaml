@@ -1,0 +1,27 @@
+bno055:
+  ros__parameters:
+    ros_topic_prefix: "bno055/"
+    connection_type: "uart"
+    uart_port: "/dev/ttyUSB1"
+    uart_baudrate: 115200
+    uart_timeout: 0.1
+    data_query_frequency: 100
+    calib_status_frequency: 0.1
+    frame_id: "imu_link"
+    operation_mode: 0x08 # 08-IMU, 0C-NDOF
+    placement_axis_remap: "P2"
+    acc_factor: 100.0
+    mag_factor: 16000000.0
+    gyr_factor: 900.0
+    grav_factor: 100.0
+    set_offsets: true # tuned for mode:IMU, frame: P2
+    offset_acc: [0xFFE0, 0x001D, 0xFFEF]
+    offset_mag: [0x0001, 0x00B2, 0xFE88]
+    offset_gyr: [0x0001, 0xFFFF, 0x0001]
+    ## Sensor standard deviation [x,y,z]
+    ## Used to calculate covariance matrices
+    ## defaults are used if parameters below are not provided
+    # variance_acc: [0.0, 0.0, 0.0] # [m/s^2]
+    # variance_angular_vel: [0.0, 0.0, 0.0] # [rad/s]
+    # variance_orientation: [0.0, 0.0, 0.0] # [rad]
+    # variance_mag: [0.0, 0.0, 0.0] # [Tesla]

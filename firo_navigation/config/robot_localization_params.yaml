@@ -7,6 +7,7 @@ ekf_filter_node_odom:
     transform_timeout: 0.0
     print_diagnostics: true
     debug: false
+    publish_tf: true
 
     map_frame: map
     odom_frame: odom
@@ -54,13 +55,13 @@ ekf_filter_node_odom:
         false,
         false,
 
-        false,
+        true,
         false,
         false,
 
         false,
         false,
-        false,
+        true,
 
         false,
         false,
@@ -71,35 +72,35 @@ ekf_filter_node_odom:
     odom1_differential: false
     odom1_relative: false
 
-    ##### imu odometry TODO
-    # imu0: imu/data
-    # imu0_config:
-    #   [
-    #     false,
-    #     false,
-    #     false,
+    #### imu
+    imu0: bno055/imu
+    imu0_config:
+      [
+        false,
+        false,
+        false,
 
-    #     true,
-    #     true,
-    #     false,
+        false,
+        false,
+        true,
 
-    #     false,
-    #     false,
-    #     false,
+        false,
+        false,
+        false,
 
-    #     true,
-    #     true,
-    #     true,
+        false,
+        false,
+        true,
 
-    #     true,
-    #     true,
-    #     true,
-    #   ]
-    # imu0_nodelay: false
-    # imu0_differential: false
-    # imu0_relative: false
-    # imu0_queue_size: 10
-    # imu0_remove_gravitational_acceleration: true
+        true,
+        false,
+        false,
+      ]
+    imu0_nodelay: false
+    imu0_differential: false
+    imu0_relative: false
+    imu0_queue_size: 10
+    imu0_remove_gravitational_acceleration: true
 
     ##### rest
     use_control: false
@@ -571,6 +572,7 @@ ekf_filter_node_map:
     transform_timeout: 0.0
     print_diagnostics: true
     debug: false
+    publish_tf: true
 
     map_frame: map
     odom_frame: odom
@@ -587,7 +589,7 @@ ekf_filter_node_map:
 
         false,
         false,
-        false,
+        true,
 
         false,
         false,
@@ -647,13 +649,13 @@ ekf_filter_node_map:
         false,
         false,
 
-        false,
+        true,
         false,
         false,
 
         false,
         false,
-        false,
+        true,
 
         false,
         false,
@@ -664,35 +666,35 @@ ekf_filter_node_map:
     odom1_differential: false
     odom1_relative: false
 
-    ##### imu odometry TODO
-    # imu0: imu/data
-    # imu0_config:
-    #   [
-    #     false,
-    #     false,
-    #     false,
+    #### imu
+    imu0: bno055/imu
+    imu0_config:
+      [
+        false,
+        false,
+        false,
 
-    #     true,
-    #     true,
-    #     false,
+        false,
+        false,
+        true,
 
-    #     false,
-    #     false,
-    #     false,
+        false,
+        false,
+        false,
 
-    #     true,
-    #     true,
-    #     true,
+        false,
+        false,
+        true,
 
-    #     true,
-    #     true,
-    #     true,
-    #   ]
-    # imu0_nodelay: true
-    # imu0_differential: false
-    # imu0_relative: false
-    # imu0_queue_size: 10
-    # imu0_remove_gravitational_acceleration: true
+        true,
+        false,
+        false,
+      ]
+    imu0_nodelay: true
+    imu0_differential: false
+    imu0_relative: false
+    imu0_queue_size: 10
+    imu0_remove_gravitational_acceleration: true
 
     ##### rest
     use_control: false
