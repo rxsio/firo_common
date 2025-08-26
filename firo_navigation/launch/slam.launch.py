@@ -55,7 +55,7 @@ def generate_launch_description():
         executable='static_transform_publisher',
         name='base_to_imu',
         output='screen',
-        arguments=['0.025', '0', '0.023', '0', '0', '0', 'torso', 'imu_link']
+        arguments=['0.025', '0', '0.023', '0', '0', '3.14159', 'torso', 'imu_link']
     )
     # base footprint transform
     base_to_footprint = Node(

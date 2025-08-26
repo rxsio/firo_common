@@ -13,7 +13,7 @@ def generate_launch_description():
     node=Node(
         package = 'bno055',
         executable = 'bno055',
-        name= "imu node",
+        name= "bno055",
         parameters = [config]
     )
     ld.add_action(node)

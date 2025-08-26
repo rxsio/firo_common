@@ -25,3 +25,8 @@ bno055:
     # variance_angular_vel: [0.0, 0.0, 0.0] # [rad/s]
     # variance_orientation: [0.0, 0.0, 0.0] # [rad]
     # variance_mag: [0.0, 0.0, 0.0] # [Tesla]
+
+    #default are:
+    #orientation_covariance: 0.0159
+    #angular_velocity_covariance: 0.04
+    #linear_acceleration_covariance: 0.017
