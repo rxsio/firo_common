@@ -65,7 +65,7 @@ def generate_launch_description():
           respawn=True,
           arguments=['--ros-args', '--log-level', 'info']         
     )
-    # twist stamper node -> humble doesnt support TS which controllers require
+    # twist stamper node -> humble doesn't support TS, which controllers require
     twist_stamper = Node(
         package='twist_stamper',
         executable='twist_stamper',
@@ -181,14 +181,6 @@ def generate_launch_description():
     )
 
     # temp 
-    # lidar base transform
-    base_to_lidar = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='base_to_lidar',
-        output='screen',
-        arguments=['0.265', '0', '0.055', '0', '0', '0', 'torso', 'lidar_link']
-    )
     # base footprint transform
     base_to_footprint = Node(
         package='tf2_ros',
@@ -203,7 +195,6 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     #temp
-    ld.add_action(base_to_lidar)
     ld.add_action(base_to_footprint)
 
     # launch nodes

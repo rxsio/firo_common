@@ -40,6 +40,15 @@ def generate_launch_description():
         }.items()
     )
 
+    # temp
+    base_to_lidar = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='base_to_lidar',
+        output='screen',
+        arguments=['0.265', '0', '0.055', '0', '0', '0', 'torso', 'lidar_link']
+    )
+
     # Define LaunchDescription variable
     ld = LaunchDescription()
 
@@ -48,5 +57,9 @@ def generate_launch_description():
 
     # Call LDLidar launch
     ld.add_action(ldlidar_launch)
+
+    # lidar tranform
+    ld.add_action(base_to_lidar)
+
 
     return ld

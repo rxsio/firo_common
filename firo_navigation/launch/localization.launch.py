@@ -12,7 +12,7 @@ def generate_launch_description():
 
     robot_localization_dir = get_package_share_directory('firo_navigation')
     parameters_file_dir = os.path.join(robot_localization_dir, 'config')
-    parameters_file_path = os.path.join(parameters_file_dir, 'robot_localization_params.yaml')
+    parameters_file_path = os.path.join(parameters_file_dir, 'localization_params.yaml')
     os.environ['FILE_PATH'] = str(parameters_file_dir)
     
     return LaunchDescription([
@@ -31,12 +31,12 @@ def generate_launch_description():
             parameters=[parameters_file_path],
             remappings=[('odometry/filtered', 'odometry/local')]           
            ),
-    launch_ros.actions.Node(
-            package='robot_localization', 
-            executable='ekf_node', 
-            name='ekf_filter_node_map',
-	        output='screen',
-            parameters=[parameters_file_path],
-            remappings=[('odometry/filtered', 'odometry/global')]
-           )
+     launch_ros.actions.Node(
+             package='robot_localization', 
+             executable='ekf_node', 
+             name='ekf_filter_node_map',
+	         output='screen',
+             parameters=[parameters_file_path],
+             remappings=[('odometry/filtered', 'odometry/global')]
+            )
 ])

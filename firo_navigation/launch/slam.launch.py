@@ -27,10 +27,10 @@ def generate_launch_description():
           parameters=[
             # YAML files
             slam_config_path # Parameters
-          ],
-          remappings=[
-                ('/pose', '/pose_slam')
-          ]        
+           ],
+           remappings=[
+                 ('/pose', '/pose_slam')
+           ]        
     )
 
     # fake odom publisher
@@ -41,23 +41,8 @@ def generate_launch_description():
         output='screen',
         arguments=['0', '0', '0', '0', '0', '0', 'odom', 'base_link']
     )
-    # lidar base transform
-    base_to_lidar = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='base_to_lidar',
-        output='screen',
-        arguments=['0.265', '0', '0.055', '0', '0', '0', 'torso', 'lidar_link']
-    )
-    # imu base transform
-    base_to_imu = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='base_to_imu',
-        output='screen',
-        arguments=['0.025', '0', '0.023', '0', '0', '3.14159', 'torso', 'imu_link']
-    )
-    # base footprint transform
+   
+    # temp
     base_to_footprint = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
@@ -77,8 +62,6 @@ def generate_launch_description():
     #ld.add_action(fake_odom)
 
     # Launch static transfrom publisher nodes
-    ld.add_action(base_to_lidar)
-    ld.add_action(base_to_imu)
     ld.add_action(base_to_footprint)
 
     return ld

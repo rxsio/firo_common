@@ -2,10 +2,10 @@ bno055:
   ros__parameters:
     ros_topic_prefix: "bno055/"
     connection_type: "uart"
-    uart_port: "/dev/ttyUSB1"
+    uart_port: "/dev/ttyUSB0"
     uart_baudrate: 115200
     uart_timeout: 0.1
-    data_query_frequency: 100
+    data_query_frequency: 80 # there are sometimes calib failures -> maybe lower frequency
     calib_status_frequency: 0.1
     frame_id: "imu_link"
     operation_mode: 0x08 # 08-IMU, 0C-NDOF
@@ -21,12 +21,15 @@ bno055:
     ## Sensor standard deviation [x,y,z]
     ## Used to calculate covariance matrices
     ## defaults are used if parameters below are not provided
-    # variance_acc: [0.0, 0.0, 0.0] # [m/s^2]
-    # variance_angular_vel: [0.0, 0.0, 0.0] # [rad/s]
-    # variance_orientation: [0.0, 0.0, 0.0] # [rad]
+    #variance_acc: [0.008, 0.013, 0.016] # [m/s^2]
+    #variance_angular_vel: [0.0005, 0.001, 0.0007] # [rad/s]
+    #variance_orientation: [0.0, 0.0, 0.0] # [rad]
     # variance_mag: [0.0, 0.0, 0.0] # [Tesla]
 
     #default are:
     #orientation_covariance: 0.0159
     #angular_velocity_covariance: 0.04
     #linear_acceleration_covariance: 0.017
+    # may calculations:
+    #ang_vel: 0.007
+    #accel: 0.08

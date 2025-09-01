@@ -113,7 +113,7 @@ planner_server:
       change_penalty: 0.05 # Penalty to apply if motion is changing directions (L to R), must be >= 0
       non_straight_penalty: 1.5 # Penalty to apply if motion is non-straight, must be => 1
       cost_penalty: 2.0 # Penalty to apply to higher cost areas when adding into the obstacle map dynamic programming distance expansion heuristic. This drives the robot more towards the center of passages. A value between 1.3 - 3.5 is reasonable.
-      rotation_penalty: 0.2 # Penalty to apply to in-place rotations, if minimum control set contains them
+      rotation_penalty: 0.01 # Penalty to apply to in-place rotations, if minimum control set contains them
       retrospective_penalty: 0.015 # Causes State Lattice to prefer later maneuvers, must be <1.0
       #lattice_filepath: "$(find firo_navigation)/config/navigation_primitives.json" # The filepath to the state lattice graph -> else use default
       lattice_filepath: "/ros2/install/firo_navigation/share/firo_navigation/config/navigation_primitives.json"
@@ -188,16 +188,17 @@ controller_server:
       yaw_goal_tolerance: 0.1
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
-      time_steps: 28
-      model_dt: 0.05
+      time_steps: 15
+      model_dt: 0.2
       batch_size: 1000
       vx_std: 0.2
       vy_std: 0.2
       wz_std: 0.2
-      vx_max: 0.1
-      vx_min: -0.1
+      vx_max: 0.2
+      vx_min: -0.2
       vy_max: 0.0
-      wz_max: 0.15
+      wz_max: 0.2
+      wz_min: 0.2
       ax_max: 0.05
       ax_min: -0.05
       ay_min: 0.0
@@ -221,16 +222,9 @@ controller_server:
         consider_footprint: true
       critics:
         [
-          "ConstraintCritic",
-          "CostCritic",
-          "GoalCritic",
-          "GoalAngleCritic",
-          "PathAlignCritic",
-          "PathFollowCritic",
-          "PathAngleCritic",
-          "PreferForwardCritic",
-          "TwirlingCritic",
-          "ObstaclesCritic",
+          "ConstraintCritic","CostCritic","GoalCritic","GoalAngleCritic",
+          "PathAlignCritic","PathFollowCritic","PathAngleCritic",
+          "PreferForwardCritic","TwirlingCritic","ObstaclesCritic",
         ]
       ConstraintCritic:
         enabled: true

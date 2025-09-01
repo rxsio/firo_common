@@ -11,7 +11,7 @@ slam_toolbox:
     # ROS Parameters
     odom_frame: odom
     map_frame: map
-    base_frame: base_footprint
+    base_frame: base_link # need to be same as ekf
     scan_topic: /ldlidar_node/scan
     use_map_saver: true
     mode: mapping #localization
