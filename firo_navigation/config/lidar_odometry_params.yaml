@@ -10,7 +10,7 @@ rf2o_laser_odometry:
 
 rf2o_laser_odometry_fixer:
   ros__parameters:
-    odom_topic: "/odom_rf_lidar"
+    odom_topic: "/odom_lidar_rf"
     odom_topic_fixed: "/odom_lidar_rf_fixed"
     covariance: [
         0.0008, # +-0.02 plus some

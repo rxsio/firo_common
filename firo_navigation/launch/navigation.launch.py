@@ -34,24 +34,24 @@ def generate_launch_description():
             package='robot_localization', 
             executable='ekf_node', 
             name='ekf_filter_node_odom',
-	    output='screen',
+	        output='screen',
             parameters=[loc_config_path],
             remappings=[('odometry/filtered', 'odometry/local')],
             respawn=True,
             arguments=['--ros-args', '--log-level', 'info']           
-        )
+    )
 
     # global robot localization node - no-lifecycle possibility
     global_localization_node = Node(
             package='robot_localization', 
             executable='ekf_node', 
             name='ekf_filter_node_map',
-	    output='screen',
+	        output='screen',
             parameters=[loc_config_path],
             remappings=[('odometry/filtered', 'odometry/global')],
             respawn=True,
             arguments=['--ros-args', '--log-level', 'info'] 
-        )
+    )
 
     # slam toolbox node in async mode
     slam_toolbox_node = LifecycleNode(
@@ -65,14 +65,12 @@ def generate_launch_description():
           respawn=True,
           arguments=['--ros-args', '--log-level', 'info']         
     )
-    # twist stamper node -> humble doesn't support TS, which controllers require
+    # twist stamper node -> humble doesn't support TS, which controllers require, also stops when goal is reached
     twist_stamper = Node(
-        package='twist_stamper',
-        executable='twist_stamper',
-        name='twist_stamper',
-        remappings=[('/cmd_vel_in','/cmd_vel_nav_smoothed'),
-                    ('/cmd_vel_out','/cmd_vel')]
-      )
+        package='firo_navigation',
+        executable='command_twist_stamper_node',
+        name='twist_stamper_goal_stopper'
+    )
 
     # nav2 nodes for lifecycle manager
     bt_navigator_node = Node(

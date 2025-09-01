@@ -5,7 +5,7 @@
 #include "nav_msgs/msg/odometry.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-"""
+/*
 Rf2o odometry node doesn't provide covariance matrix which needs to be added. Can be given with yaml file.
 Also, rf2o gives linear velocity in opposite direction. For now, this can't be addressed as lidar driver node does 
 not allow for snipping scans from the front. Angular velocity is correct sign.
@@ -17,7 +17,7 @@ Inputs:
  covariance - given covariance matrix
 Outputs:
   message from odom_topic is published onto odom_topic_fixed with gioven covaraince and changed v_x direction -> see OdomCallback function.
-"""
+*/
 
 class CovarianceFixer : public rclcpp::Node
 {
@@ -69,7 +69,7 @@ private:
     msg_out.twist.covariance = default_covariance_; // set given covariance
 
     // Publish on output topic
-    publisher_->publish(msg_out);
+    this->publisher_->publish(msg_out);
   }
 
   // Params 

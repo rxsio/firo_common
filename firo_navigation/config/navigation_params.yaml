@@ -165,7 +165,7 @@ smoother_server:
 
 controller_server:
   ros__parameters:
-    controller_frequency: 20.0
+    controller_frequency: 50.0
     costmap_update_timeout: 0.3
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5 # for diff-drive robots
@@ -173,6 +173,7 @@ controller_server:
     failure_tolerance: 0.3
     odom_topic: "odometry/local"
     odom_duration: 0.3
+    publish_zero_velocity: true
     progress_checker_plugin: "progress_checker"
     goal_checker_plugins: ["general_goal_checker"] # "precise_goal_checker"
     current_goal_checker: "general_goal_checker"
@@ -184,23 +185,23 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.1
-      yaw_goal_tolerance: 0.1
+      xy_goal_tolerance: 0.2
+      yaw_goal_tolerance: 0.25
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
       time_steps: 15
       model_dt: 0.2
-      batch_size: 1000
+      batch_size: 2000
       vx_std: 0.2
       vy_std: 0.2
       wz_std: 0.2
-      vx_max: 0.2
-      vx_min: -0.2
+      vx_max: 0.15
+      vx_min: -0.15
       vy_max: 0.0
       wz_max: 0.2
       wz_min: 0.2
-      ax_max: 0.05
-      ax_min: -0.05
+      ax_max: 0.5
+      ax_min: -0.5
       ay_min: 0.0
       ay_max: 0.0
       az_max: 0.5
@@ -211,6 +212,7 @@ controller_server:
       gamma: 0.015
       motion_model: "DiffDrive"
       visualize: false
+      publish_optimal_trajectory: false
       reset_period: 1.0
       regenerate_noises: false
       TrajectoryVisualizer:
@@ -222,9 +224,10 @@ controller_server:
         consider_footprint: true
       critics:
         [
-          "ConstraintCritic","CostCritic","GoalCritic","GoalAngleCritic",
-          "PathAlignCritic","PathFollowCritic","PathAngleCritic",
-          "PreferForwardCritic","TwirlingCritic","ObstaclesCritic",
+          "ConstraintCritic","CostCritic","GoalCritic",
+          "GoalAngleCritic","PathAlignCritic","PathFollowCritic",
+          "PathAngleCritic","PreferForwardCritic","ObstaclesCritic",
+          "TwirlingCritic","VelocityDeadbandCritic"
         ]
       ConstraintCritic:
         enabled: true
@@ -239,12 +242,12 @@ controller_server:
         enabled: true
         cost_power: 1
         cost_weight: 3.0
-        threshold_to_consider: 0.5
+        threshold_to_consider: 0.3
       PreferForwardCritic:
         enabled: true
         cost_power: 1
         cost_weight: 5.0
-        threshold_to_consider: 0.5
+        threshold_to_consider: 0.3
       ObstaclesCritic:
         enabled: true
         cost_power: 1
@@ -253,7 +256,7 @@ controller_server:
         consider_footprint: true
         collision_cost: 10000.0
         collision_margin_distance: 0.1
-        near_goal_distance: 0.5
+        near_goal_distance: 0.3
         cost_scaling_factor: 2.58
         inflation_radius: 1.75
       CostCritic:
@@ -263,7 +266,7 @@ controller_server:
         critical_cost: 300.0
         consider_footprint: true
         collision_cost: 1000000.0
-        near_goal_distance: 1.0
+        near_goal_distance: 0.3
         trajectory_point_step: 2
       PathAlignCritic:
         enabled: true
@@ -271,7 +274,7 @@ controller_server:
         cost_weight: 14.0
         max_path_occupancy_ratio: 0.05
         trajectory_point_step: 4
-        threshold_to_consider: 0.5
+        threshold_to_consider: 0.3
         offset_from_furthest: 20
         use_path_orientations: false
       PathFollowCritic:
@@ -285,18 +288,18 @@ controller_server:
         cost_power: 1
         cost_weight: 2.0
         offset_from_furthest: 4
-        threshold_to_consider: 0.5
+        threshold_to_consider: 1.4
         max_angle_to_furthest: 1.0
         mode: 0
-      # VelocityDeadbandCritic:
-      #   enabled: true
-      #   cost_power: 1
-      #   cost_weight: 35.0
-      #   deadband_velocities: [0.05, 0.05, 0.05]
+      VelocityDeadbandCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 35.0
+        deadband_velocities: [0.02, 0.02, 0.02]
       TwirlingCritic:
         enabled: true
         twirling_cost_power: 1
-        twirling_cost_weight: 10.0
+        twirling_cost_weight: 5.0
 
 global_costmap:
   global_costmap:
@@ -407,14 +410,14 @@ velocity_smoother:
     smoothing_frequency: 20.0
     scale_velocities: false
     feedback: "OPEN_LOOP"
-    max_velocity: [0.25, 0.0, 0.25]
-    min_velocity: [-0.25, 0.0, -0.25]
+    max_velocity: [0.15, 0.0, 0.2]
+    min_velocity: [-0.15, 0.0, -0.2]
     deadband_velocity: [0.0, 0.0, 0.0]
     velocity_timeout: 1.0
     max_accel: [0.05, 0.0, 0.5]
     max_decel: [-0.05, 0.0, -0.5]
     odom_topic: "odometry/local"
-    odom_duration: 0.1
+    odom_duration: 0.22
     use_realtime_priority: false
 
 collision_monitor:
@@ -443,10 +446,10 @@ collision_monitor:
       points: [0.545, 0.3725, -0.495, 0.3725, -0.495, -0.3725, 0.545, -0.3725]
       action_type: "slowdown"
       max_points: 3
-      slowdown_ratio: 0.4
+      slowdown_ratio: 0.3
       visualize: true
       polygon_pub_topic: "polygon_slowdown"
-      enabled: false
+      enabled: true
     observation_sources: ["scan"]
     scan:
       source_timeout: 0.2

@@ -27,10 +27,13 @@ if(BUILD_TESTING)
 endif()
 
 add_executable(lidar_odom_cov_fixer_node src/lidar_odom_cov_fixer_node.cpp)
+add_executable(command_twist_stamper_node src/command_twist_stamper_node.cpp)
 
 ament_target_dependencies(lidar_odom_cov_fixer_node rclcpp nav_msgs)
+ament_target_dependencies(command_twist_stamper_node rclcpp geometry_msgs action_msgs)
 
-install(TARGETS lidar_odom_cov_fixer_node DESTINATION lib/${PROJECT_NAME})
+
+install(TARGETS lidar_odom_cov_fixer_node command_twist_stamper_node DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
 
