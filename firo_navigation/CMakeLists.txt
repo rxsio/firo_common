@@ -26,14 +26,14 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-add_executable(lidar_odom_cov_fixer_node src/lidar_odom_cov_fixer_node.cpp)
+add_executable(odometry_fixer_node src/odometry_fixer_node.cpp)
 add_executable(command_twist_stamper_node src/command_twist_stamper_node.cpp)
 
-ament_target_dependencies(lidar_odom_cov_fixer_node rclcpp nav_msgs)
+ament_target_dependencies(odometry_fixer_node rclcpp nav_msgs)
 ament_target_dependencies(command_twist_stamper_node rclcpp geometry_msgs action_msgs)
 
 
-install(TARGETS lidar_odom_cov_fixer_node command_twist_stamper_node DESTINATION lib/${PROJECT_NAME})
+install(TARGETS odometry_fixer_node command_twist_stamper_node DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
 

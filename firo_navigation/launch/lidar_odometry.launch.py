@@ -26,7 +26,7 @@ def generate_launch_description():
 
     lidar_odom_fixer_node = Node(
         package='firo_navigation',
-        executable='lidar_odom_cov_fixer_node',
+        executable='odometry_fixer_node',
         name='rf2o_laser_odometry_fixer',
         output='screen',
         parameters=[
