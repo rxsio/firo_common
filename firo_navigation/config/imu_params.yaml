@@ -5,8 +5,8 @@ bno055:
     uart_port: "/dev/ttyUSB0"
     uart_baudrate: 115200
     uart_timeout: 0.1
-    data_query_frequency: 80 # there are sometimes calib failures -> maybe lower frequency
-    calib_status_frequency: 0.1
+    data_query_frequency: 60  # there are sometimes calib failures -> lowered and seems to be gone
+    calib_status_frequency: 0.2 # there are sometimes calib failures -> lowered and seems to be gone
     frame_id: "imu_link"
     operation_mode: 0x08 # 08-IMU, 0C-NDOF
     placement_axis_remap: "P2"
@@ -21,15 +21,23 @@ bno055:
     ## Sensor standard deviation [x,y,z]
     ## Used to calculate covariance matrices
     ## defaults are used if parameters below are not provided
-    #variance_acc: [0.008, 0.013, 0.016] # [m/s^2]
-    #variance_angular_vel: [0.0005, 0.001, 0.0007] # [rad/s]
-    #variance_orientation: [0.0, 0.0, 0.0] # [rad]
+    variance_acc: [0.4077, 0.3999, 0.5908] # [m/s^2]
+    variance_angular_vel: [0.0114, 0.0144, 0.0429] # [rad/s]
+    variance_orientation: [0.01, 0.01, 0.01] # [rad]
     # variance_mag: [0.0, 0.0, 0.0] # [Tesla]
 
     #default are:
     #orientation_covariance: 0.0159
     #angular_velocity_covariance: 0.04
     #linear_acceleration_covariance: 0.017
-    # may calculations:
-    #ang_vel: 0.007
-    #accel: 0.08
+    # my calculations:
+    # Imu X: 0.0108
+    # Imu Y: 0.0107
+    # Imu Z: 0.3039
+    # Imu W: 0.7419
+    # Imu OMx: 0.0114
+    # Imu OMy: 0.0144
+    # Imu OMz: 0.0429
+    # Imu Ax: 0.4077
+    # Imu Ay: 0.3999
+    # Imu Az: 0.5908

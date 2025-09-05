@@ -15,21 +15,14 @@ rf2o_laser_odometry_fixer:
     x_dot_coeff: -1.0
     yaw_dot_coeff: 1.0
     covariance: [
-        0.0008, # +-0.02 plus some
+        0.1182, #  0.1182
         0.0,
         0.0,
         0.0,
         0.0,
         0.0,
         0.0,
-        0.0008, # +-0.02 plus some
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
+        0.001, # 0.0 -> giving 0.001 so ekf doesn't scream
         0.0,
         0.0,
         0.0,
@@ -50,5 +43,16 @@ rf2o_laser_odometry_fixer:
         0.0,
         0.0,
         0.0,
-        0.0008, # +-0.02 plus some
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0408, # 0.0408
       ]
+#  my calculations from test:
+# Lidar Vx: 0.1182
+# Lidar Vy: 0.0
+# Lidar OMz: 0.0408

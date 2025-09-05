@@ -1,6 +1,6 @@
 ekf_filter_node_odom:
   ros__parameters:
-    frequency: 50.0
+    frequency: 30.0
     sensor_timeout: 0.2 # lidar odom has 6Hz so must be at least 0.17
     two_d_mode: true
     transform_time_offset: 0.0
@@ -59,7 +59,7 @@ ekf_filter_node_odom:
         false,false,false,
         false,false,true,
 
-        false,false,false,
+        true,false,false,
       ]
     imu0_nodelay: true
     imu0_differential: false
@@ -112,11 +112,11 @@ ekf_filter_node_odom:
 
 ekf_filter_node_map:
   ros__parameters:
-    frequency: 20.0
+    frequency: 10.0
     sensor_timeout: 0.2 # lidar odom has 6Hz so must be at least 0.17
     two_d_mode: true
     transform_time_offset: 0.0
-    transform_timeout: 0.011 # half the odom ekf + a lil bit
+    transform_timeout: 0.016 # half the odom ekf + a lil bit
     print_diagnostics: true
     debug: false
     publish_tf: true
@@ -188,7 +188,7 @@ ekf_filter_node_map:
         false,false,false,
         false,false,true,
 
-        false,false,false,
+        true,false,false,
       ]
     imu0_nodelay: true
     imu0_differential: false
