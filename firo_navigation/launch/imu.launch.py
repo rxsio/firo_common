@@ -29,5 +29,4 @@ def generate_launch_description():
 
     ld.add_action(node)
     ld.add_action(base_to_imu)
-
     return ld

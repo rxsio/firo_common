@@ -87,17 +87,17 @@ ekf_filter_node_odom:
     # We don't know where the robot is, so we have to initialize all variances as high
     # Our only assumptions are:
     # robot is ±20m from the origin in x and y
-    # 0.0 z is where we start, because we don't need absolute height
-    # and we actually don't use it, because with gnss we would get z of tenths or hundreds of meters
+    # 0.0 z is where we start, because we don't need height
+    # robot is not flipped, it start at even ground
     # which is good, but it is awful for visualization
-    # robot is not flipped, but it may start at uneven ground at maximum ±60deg (1rad exactly)
+    # robot is not flipped, it start at even ground
     # heading can be anything 
     # velocities and accelerations are the same as in odom ekf config
     initial_estimate_covariance: [4e2, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    4e2, 0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    0.0,    1e-9, 0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
-                                  0.0,    0.0,    0.0,    1.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
-                                  0.0,    0.0,    0.0,    0.0,    1.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                  0.0,    0.0,    0.0,    1e-9,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                  0.0,    0.0,    0.0,    0.0,    1e-9,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    0.0,    0.0,    0.0,    0.0,    10.0,   0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    1e-1,   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    1e-1,    0.0,    0.0,    0.0,   0.0,    0.0,    0.0,    0.0,
@@ -124,11 +124,11 @@ ekf_filter_node_map:
 
     map_frame: map
     odom_frame: odom
-    base_link_frame: base_link # need to be same as slam
+    base_link_frame: base_footprint # need to be same as global one
     world_frame: map
 
     ##### slam pose
-    pose0: pose_slam
+    pose0: pose_global
     pose0_config:
       [
         true,true,false,
@@ -216,17 +216,15 @@ ekf_filter_node_map:
     # We don't know where the robot is, so we have to initialize all variances as high
     # Our only assumptions are:
     # robot is ±20m from the origin in x and y
-    # 0.0 z is where we start, because we don't need absolute height
-    # and we actually don't use it, because with gnss we would get z of tenths or hundreds of meters
-    # which is good, but it is awful for visualization
-    # robot is not flipped, but it may start at uneven ground at maximum ±60deg (1rad exactly)
+    # 0.0 z is where we start, because we don't need height
+    # robot is not flipped, it start at even ground
     # heading can be anything 
     # velocities and accelerations are the same as in odom ekf config
     initial_estimate_covariance: [4e2, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    4e2, 0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    0.0,    1e-9, 0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
-                                  0.0,    0.0,    0.0,    1.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
-                                  0.0,    0.0,    0.0,    0.0,    1.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                  0.0,    0.0,    0.0,    1e-9,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                  0.0,    0.0,    0.0,    0.0,    1e-9,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    0.0,    0.0,    0.0,    0.0,    10.0,   0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    1e-1,   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    1e-1,    0.0,    0.0,    0.0,   0.0,    0.0,    0.0,    0.0,

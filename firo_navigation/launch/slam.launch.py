@@ -1,10 +1,6 @@
 import os
-
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node, LifecycleNode
 
 
@@ -29,17 +25,8 @@ def generate_launch_description():
             slam_config_path # Parameters
            ],
            remappings=[
-                 ('/pose', '/pose_slam')
+                 ('/pose', '/pose_global')
            ]        
-    )
-
-    # fake odom publisher
-    fake_odom = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='fake_odom_to_base_link',
-        output='screen',
-        arguments=['0', '0', '0', '0', '0', '0', 'odom', 'base_link']
     )
    
     # temp
@@ -54,14 +41,8 @@ def generate_launch_description():
 
     # Define LaunchDescription variable
     ld = LaunchDescription()
-
     # Launch SLAM Toolbox node
     ld.add_action(slam_toolbox_node)
-
-    # Launch fake odom publisher node
-    #ld.add_action(fake_odom)
-
     # Launch static transfrom publisher nodes
     ld.add_action(base_to_footprint)
-
     return ld

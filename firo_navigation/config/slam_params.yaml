@@ -11,7 +11,7 @@ slam_toolbox:
     # ROS Parameters
     odom_frame: odom
     map_frame: map
-    base_frame: base_link # need to be same as ekf
+    base_frame: base_footprint # needs to be same as ekf
     scan_topic: /ldlidar_node/scan
     use_map_saver: true
     mode: mapping #localization
@@ -19,8 +19,8 @@ slam_toolbox:
     # if you'd like to immediately start continuing a map at a given pose
     # or at the dock, but they are mutually exclusive, if pose is given
     # will use pose
-    #map_file_name: test_steve
-    # map_start_pose: [0.0, 0.0, 0.0]
+    #map_file_name: flash_hall_serialized
+    #map_start_pose: [0.0, 0.0, 0.0]
     #map_start_at_dock: true
 
     debug_logging: false
@@ -45,16 +45,16 @@ slam_toolbox:
     scan_buffer_maximum_scan_distance: 8.0 # Maximum distance of a scan from the pose before removing the scan from the buffer
     link_match_minimum_response_fine: 0.1 # The threshold link matching algorithm response for fine resolution to pass
     link_scan_maximum_distance: 1.5 # Maximum distance between linked scans to be valid -> default but maybe try more if issues
-    loop_search_maximum_distance: 20.0 # Maximum threshold of distance for scans to be considered for loop closure -> more to help loops closure ! lower doesn't close loop
+    loop_search_maximum_distance: 20.0 # Maximum threshold of distance for scans to be considered for loop closure -> more to help loops closure, lower doesn't close loop
     do_loop_closing: true # The minimum chain length of scans to look for loop closure
     loop_match_minimum_chain_size: 10 # The minimum chain length of scans to look for loop closure
     loop_match_maximum_variance_coarse: 3.0 # The threshold variance in coarse search to pass to refine
     loop_match_minimum_response_coarse: 0.35 # The threshold response of the loop closure algorithm in coarse search to pass to refine
-    loop_match_minimum_response_fine: 0.45 # The threshold response of the loop closure algorithm in fine search to pass to refine
+    loop_match_minimum_response_fine: 0.45 # The threshold response of the loop closure algorithm in fine search to pass to refine !
 
     # Correlation Parameters - Correlation Parameters
-    correlation_search_space_dimension: 0.5 # Search grid size to do scan correlation over
-    correlation_search_space_resolution: 0.01 # Search grid resolution to do scan correlation over
+    correlation_search_space_dimension: 2.0 # Search grid size to do scan correlation over !
+    correlation_search_space_resolution: 0.01 # Search grid resolution to do scan correlation over !
     correlation_search_space_smear_deviation: 0.1 # Amount of multimodal smearing to smooth out responses
 
     # Correlation Parameters - Loop Closure Parameters
