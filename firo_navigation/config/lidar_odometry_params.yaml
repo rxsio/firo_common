@@ -1,9 +1,9 @@
 rf2o_laser_odometry:
   ros__parameters:
-    laser_scan_topic: "/ldlidar_node/scan"
+    laser_scan_topic: "/lidar_horizontal/scan"
     odom_topic: "/odom_lidar_rf"
     publish_tf: False
-    base_frame_id: "base_link"
+    base_frame_id: "lidar_horizontal_link"
     odom_frame_id: "odom"
     init_pose_from_topic: ""
     freq: 5.0 # lidar is 6

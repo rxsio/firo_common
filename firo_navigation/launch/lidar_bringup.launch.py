@@ -45,26 +45,6 @@ def launch_setup(context, *args, **kwargs):
     if node_namespace_val != '':
         node_namespace_val = '/' + node_namespace_val
 
-    # URDF path
-    urdf_file_name = 'ldlidar_descr.urdf.xml'
-    urdf = os.path.join(
-        get_package_share_directory('ldlidar_node'),
-        'urdf',
-        urdf_file_name)
-    with open(urdf, 'r') as infp:
-        robot_desc = infp.read()
-
-    # Robot State Publisher node
-    rsp_node = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        namespace=node_ns,
-        name='ldlidar_state_publisher',
-        output='screen',
-        parameters=[{'robot_description': robot_desc}],
-        arguments=[urdf]
-    )
-    #return_array.append(rsp_node) -> dont show urdf
 
     # LDLidar component if required
     if container_name_val=='':

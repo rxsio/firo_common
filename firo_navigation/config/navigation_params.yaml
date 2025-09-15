@@ -57,7 +57,7 @@ amcl:
     z_max: 0.05
     z_rand: 0.1 # this is used by likelihood_field - decreased
     z_short: 0.05
-    scan_topic: ldlidar_node/scan
+    scan_topic: lidar_horizontal/scan
     set_initial_pose: true
     initial_pose:
       x: 0.0
@@ -368,7 +368,7 @@ global_costmap:
         enabled: true
         observation_sources: scan
         scan:
-          topic: /ldlidar_node/scan
+          topic: /lidar_horizontal/scan
           max_obstacle_height: 2.0
           clearing: true
           marking: true
@@ -403,7 +403,7 @@ local_costmap:
         enabled: true
         observation_sources: scan
         scan:
-          topic: /ldlidar_node/scan
+          topic: /lidar_horizontal/scan
           max_obstacle_height: 2.0
           clearing: true
           marking: true
@@ -497,5 +497,5 @@ collision_monitor:
     scan:
       source_timeout: 0.2
       type: "scan"
-      topic: "/ldlidar_node/scan"
+      topic: "/lidar_horizontal/scan"
       enabled: true

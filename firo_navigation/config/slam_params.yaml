@@ -12,7 +12,7 @@ slam_toolbox:
     odom_frame: odom
     map_frame: map
     base_frame: base_footprint # needs to be same as ekf
-    scan_topic: /ldlidar_node/scan
+    scan_topic: /lidar_horizontal/scan
     use_map_saver: true
     mode: mapping #localization
 
