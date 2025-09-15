@@ -1,59 +1,58 @@
+#!/usr/bin/env python3
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
+'''
+Parameter Description:
+---
+- Set laser scan directon: 
+  1. Set counterclockwise, example: {'laser_scan_dir': True} - ROS standard
+  2. Set clockwise,        example: {'laser_scan_dir': False}
+- Angle crop setting, Mask data within the set angle range:
+  1. Enable angle crop fuction:
+    1.1. enable angle crop,  example: {'enable_angle_crop_func': True}
+    1.2. disable angle crop, example: {'enable_angle_crop_func': False}
+  2. Angle cropping interval setting:
+  - The distance and intensity data within the set angle range will be set to 0.
+  - angle >= 'angle_crop_min' and angle <= 'angle_crop_max' which is [angle_crop_min, angle_crop_max], unit is degress.
+    example:
+      {'angle_crop_min': 135.0}
+      {'angle_crop_max': 225.0}
+      which is [135.0, 225.0], angle unit is degress.
+'''
 
 def generate_launch_description():
-    
+
     # Lifecycle manager configuration file
-    lc_mgr_config_path = os.path.join(
+    lidar_params = os.path.join(
         get_package_share_directory('firo_navigation'),
         'config',
         'lidar_params.yaml'
     )
 
-    # Lifecycle manager node
-    lc_mgr_node = Node(
-        package='nav2_lifecycle_manager',
-        executable='lifecycle_manager',
-        name='lifecycle_manager',
+    # LDROBOT LiDAR publisher node
+    lidar_horizontal_node = Node(
+        package='ldlidar_sl_ros2',
+        executable='ldlidar_sl_ros2_node',
+        name='lidar_horizontal',
         output='screen',
-        parameters=[
-            # YAML files
-            lc_mgr_config_path  # Parameters
-        ]
+        parameters=[lidar_params]
     )
-
-    # Include launch
-    lidar_horizontal_launch = IncludeLaunchDescription(
-        launch_description_source=PythonLaunchDescriptionSource([
-            get_package_share_directory('firo_navigation'),
-            '/launch/lidar_bringup.launch.py'
-        ]),
-        launch_arguments={
-            'node_name': 'lidar_horizontal'
-        }.items()
+    lidar_vertical_left_node = Node(
+        package='ldlidar_sl_ros2',
+        executable='ldlidar_sl_ros2_node',
+        name='lidar_vertical_left',
+        output='screen',
+        parameters=[lidar_params]
     )
-    lidar_vertical_left_launch = IncludeLaunchDescription(
-        launch_description_source=PythonLaunchDescriptionSource([
-            get_package_share_directory('firo_navigation'),
-            '/launch/lidar_bringup.launch.py'
-        ]),
-        launch_arguments={
-            'node_name': 'lidar_vertical_left'
-        }.items()
-    )
-    lidar_vertical_right_launch = IncludeLaunchDescription(
-        launch_description_source=PythonLaunchDescriptionSource([
-            get_package_share_directory('firo_navigation'),
-            '/launch/lidar_bringup.launch.py'
-        ]),
-        launch_arguments={
-            'node_name': 'lidar_vertical_right'
-        }.items()
+    lidar_vertical_right_node = Node(
+        package='ldlidar_sl_ros2',
+        executable='ldlidar_sl_ros2_node',
+        name='lidar_vertical_right',
+        output='screen',
+        parameters=[lidar_params]
     )
 
     # temp
@@ -81,13 +80,9 @@ def generate_launch_description():
 
     # Define LaunchDescription variable
     ld = LaunchDescription()
-    # Launch Nav2 Lifecycle Manager
-    ld.add_action(lc_mgr_node)
-    # Call LDLidar launch
-    ld.add_action(lidar_horizontal_launch)
-    #ld.add_action(lidar_vertical_left_launch)
-    #ld.add_action(lidar_vertical_right_launch)
-    # lidar tranform
+    ld.add_action(lidar_horizontal_node)
+    ld.add_action(lidar_vertical_left_node)
+    ld.add_action(lidar_vertical_right_node)
     ld.add_action(base_to_lidar)
     ld.add_action(base_to_lidar_left)
     ld.add_action(base_to_lidar_right)

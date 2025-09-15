@@ -6,7 +6,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
     # Include lidar launch
-    ldlidar_launch = IncludeLaunchDescription(
+    lidar_launch = IncludeLaunchDescription(
         launch_description_source=PythonLaunchDescriptionSource([
             get_package_share_directory('firo_navigation'),
             '/launch/lidar.launch.py'
@@ -33,7 +33,7 @@ def generate_launch_description():
     # Define LaunchDescription variable
     ld = LaunchDescription()
     # Call launches
-    ld.add_action(ldlidar_launch)
+    ld.add_action(lidar_launch)
     ld.add_action(lidar_odom_launch)
     ld.add_action(imu_launch)
     return ld

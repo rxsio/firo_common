@@ -1,7 +1,7 @@
 rf2o_laser_odometry:
   ros__parameters:
     laser_scan_topic: "/lidar_horizontal/scan"
-    odom_topic: "/odom_lidar_rf"
+    odom_topic: "/odom_lidar_rf2o"
     publish_tf: False
     base_frame_id: "lidar_horizontal_link"
     odom_frame_id: "odom"
@@ -10,8 +10,8 @@ rf2o_laser_odometry:
 
 rf2o_laser_odometry_fixer:
   ros__parameters:
-    odom_topic: "/odom_lidar_rf"
-    odom_topic_fixed: "/odom_lidar_rf_fixed"
+    odom_topic: "/odom_lidar_rf2o"
+    odom_topic_fixed: "/odom_lidar_rf2o_fixed"
     x_dot_coeff: -1.0
     yaw_dot_coeff: 1.0
     covariance: [

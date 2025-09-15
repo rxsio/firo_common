@@ -1,67 +1,39 @@
 lidar_horizontal:
   ros__parameters:
-    general:
-      debug_mode: false # true to activate debug messages
-    comm:
-      serial_port: "/dev/ttyUSB2" # serial port name
-      baudrate: 230400 # serial baudrate for LDLiDAR_LD19: 230400. Serial baudrate for LDLiDAR_STL27L: 921600
-      timeout_msec: 1000 # data communication timeout in msec
-    lidar:
-      model: "LDLiDAR_LD19" # Model type: LDLiDAR_LD06, LDLiDAR_LD19, LDLiDAR_STL27L
-      rot_verse: "CCW" # 'CW' -> `CLOCKWISE` / 'CCW' -> `COUNTERCLOCKWISE` [ROS STANDARD]
-      units: "M" # 'MM' -> `MILLIMETERS` / 'CM' -> `CENTIMETERS` / 'M' -> `METERS` [ROS STANDARD]
-      frame_id: "lidar_horizontal_link" # TF frame name for the lidar
-      bins: 666 # set to 0 for dinamic scan size according to rotation speed, set to a fixed value [e.g. 455] for compatibility with SLAM Toolbox
-      range_min: 0.08 # Minimum distance in 'units'
-      range_max: 8.0 # Maximum distance in 'units'
-      enable_angle_crop: true # enable angle cropping
-      angle_crop_min: 133.0 # minimum angle for cropping
-      angle_crop_max: 227.0 # maximum angle for cropping
+    product_name: 'LDLiDAR_LD14P' # Leave this, won't work otherwise
+    laser_scan_topic_name: 'lidar_horizontal/scan'
+    point_cloud_2d_topic_name: 'pointcloud2d' # Leave this, won't work otherwise
+    frame_id: 'lidar_horizontal_link'
+    port_name: '/dev/ttyUSB2'
+    serial_baudrate: 230400 # Leave this, won't work otherwise
+    laser_scan_dir: True
+    enable_angle_crop_func: True
+    angle_crop_min: 133.0
+    angle_crop_max: 227.0
 
 lidar_vertical_left:
   ros__parameters:
-    general:
-      debug_mode: false # true to activate debug messages
-    comm:
-      serial_port: "/dev/ttyUSB3" # serial port name
-      baudrate: 230400 # serial baudrate for LDLiDAR_LD19: 230400. Serial baudrate for LDLiDAR_STL27L: 921600
-      timeout_msec: 1000 # data communication timeout in msec
-    lidar:
-      model: "LDLiDAR_LD19" # Model type: LDLiDAR_LD06, LDLiDAR_LD19, LDLiDAR_STL27L
-      rot_verse: "CCW" # 'CW' -> `CLOCKWISE` / 'CCW' -> `COUNTERCLOCKWISE` [ROS STANDARD]
-      units: "M" # 'MM' -> `MILLIMETERS` / 'CM' -> `CENTIMETERS` / 'M' -> `METERS` [ROS STANDARD]
-      frame_id: "lidar_vertical_left_link" # TF frame name for the lidar
-      bins: 666 # set to 0 for dinamic scan size according to rotation speed, set to a fixed value [e.g. 455] for compatibility with SLAM Toolbox
-      range_min: 0.08 # Minimum distance in 'units'
-      range_max: 8.0 # Maximum distance in 'units'
-      enable_angle_crop: true # enable angle cropping
-      angle_crop_min: 180.0 # minimum angle for cropping
-      angle_crop_max: 360.0 # maximum angle for cropping
+    product_name: 'LDLiDAR_LD14P' # Leave this, won't work otherwise
+    laser_scan_topic_name: 'lidar_vertical_left/scan'
+    point_cloud_2d_topic_name: 'pointcloud2d' # Leave this, won't work otherwise
+    frame_id: 'lidar_vertical_left_link'
+    port_name: '/dev/ttyUSB3'
+    serial_baudrate: 230400 # Leave this, won't work otherwise
+    laser_scan_dir: True
+    enable_angle_crop_func: True
+    angle_crop_min: 180.0
+    angle_crop_max: 360.0
 
 lidar_vertical_right:
   ros__parameters:
-    general:
-      debug_mode: false # true to activate debug messages
-    comm:
-      serial_port: "/dev/ttyUSB4" # serial port name
-      baudrate: 230400 # serial baudrate for LDLiDAR_LD19: 230400. Serial baudrate for LDLiDAR_STL27L: 921600
-      timeout_msec: 1000 # data communication timeout in msec
-    lidar:
-      model: "LDLiDAR_LD19" # Model type: LDLiDAR_LD06, LDLiDAR_LD19, LDLiDAR_STL27L
-      rot_verse: "CCW" # 'CW' -> `CLOCKWISE` / 'CCW' -> `COUNTERCLOCKWISE` [ROS STANDARD]
-      units: "M" # 'MM' -> `MILLIMETERS` / 'CM' -> `CENTIMETERS` / 'M' -> `METERS` [ROS STANDARD]
-      frame_id: "lidar_vertical_right_link" # TF frame name for the lidar
-      bins: 666 # set to 0 for dinamic scan size according to rotation speed, set to a fixed value [e.g. 455] for compatibility with SLAM Toolbox
-      range_min: 0.08 # Minimum distance in 'units'
-      range_max: 8.0 # Maximum distance in 'units'
-      enable_angle_crop: true # enable angle cropping
-      angle_crop_min: 0.001 # minimum angle for cropping
-      angle_crop_max: 180.0 # maximum angle for cropping
+    product_name: 'LDLiDAR_LD14P' # Leave this, won't work otherwise
+    laser_scan_topic_name: 'lidar_vertical_right/scan'
+    point_cloud_2d_topic_name: 'pointcloud2d' # Leave this, won't work otherwise
+    frame_id: 'lidar_vertical_right_link'
+    port_name: '/dev/ttyUSB4'
+    serial_baudrate: 230400 # Leave this, won't work otherwise
+    laser_scan_dir: True
+    enable_angle_crop_func: True
+    angle_crop_min: 0.0
+    angle_crop_max: 180.0
 
-lifecycle_manager:
-  ros__parameters:
-    autostart: True
-    node_names: ["lidar_horizontal"]
-    bond_timeout: 5.0
-    attempt_respawn_reconnection: true
-    bond_respawn_max_duration: 10.0

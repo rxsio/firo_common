@@ -366,9 +366,29 @@ global_costmap:
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: true
-        observation_sources: scan
-        scan:
+        observation_sources: ["scan_horizontal", "scan_vertical_left", "scan_vertical_right"]
+        scan_horizontal:
           topic: /lidar_horizontal/scan
+          max_obstacle_height: 2.0
+          clearing: true
+          marking: true
+          data_type: "LaserScan"
+          raytrace_max_range: 3.4
+          raytrace_min_range: 0.0
+          obstacle_max_range: 3.0
+          obstacle_min_range: 0.0
+        scan_vertical_left:
+          topic: /lidar_vertical_left/scan_filtered
+          max_obstacle_height: 2.0
+          clearing: true
+          marking: true
+          data_type: "LaserScan"
+          raytrace_max_range: 3.4
+          raytrace_min_range: 0.0
+          obstacle_max_range: 3.0
+          obstacle_min_range: 0.0
+        scan_vertical_right:
+          topic: /lidar_vertical_right/scan_filtered
           max_obstacle_height: 2.0
           clearing: true
           marking: true
@@ -397,13 +417,33 @@ local_costmap:
       footprint: "[[0.345, 0.2225], [-0.345, 0.2225], [-0.345, -0.2225], [0.345, -0.2225]]"
       footprint_padding: 0.03
       always_send_full_costmap: true
-      plugins: ["obstacle_layer", "denoise_layer", "inflation_layer"] # "voxel_layer" for vertical lidar?
+      plugins: ["obstacle_layer", "denoise_layer", "inflation_layer"]
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: true
-        observation_sources: scan
-        scan:
+        observation_sources: ["scan_horizontal", "scan_vertical_left", "scan_vertical_right"]
+        scan_horizontal:
           topic: /lidar_horizontal/scan
+          max_obstacle_height: 2.0
+          clearing: true
+          marking: true
+          data_type: "LaserScan"
+          raytrace_max_range: 3.4
+          raytrace_min_range: 0.0
+          obstacle_max_range: 3.0
+          obstacle_min_range: 0.0
+        scan_vertical_left:
+          topic: /lidar_vertical_left/scan_filtered
+          max_obstacle_height: 2.0
+          clearing: true
+          marking: true
+          data_type: "LaserScan"
+          raytrace_max_range: 3.4
+          raytrace_min_range: 0.0
+          obstacle_max_range: 3.0
+          obstacle_min_range: 0.0
+        scan_vertical_right:
+          topic: /lidar_vertical_right/scan_filtered
           max_obstacle_height: 2.0
           clearing: true
           marking: true
@@ -493,9 +533,19 @@ collision_monitor:
       visualize: true
       polygon_pub_topic: "polygon_slowdown"
       enabled: true
-    observation_sources: ["scan"]
-    scan:
+    observation_sources: ["scan_horizontal", "scan_vertical_left", "scan_vertical_right"]
+    scan_horizontal:
       source_timeout: 0.2
       type: "scan"
       topic: "/lidar_horizontal/scan"
+      enabled: true
+    scan_vertical_left:
+      source_timeout: 0.2
+      type: "scan"
+      topic: "/lidar_vertical_left/scan_filtered"
+      enabled: true
+    scan_vertical_right:
+      source_timeout: 0.2
+      type: "scan"
+      topic: "/lidar_vertical_right/scan_filtered"
       enabled: true

@@ -33,7 +33,7 @@ ekf_filter_node_odom:
     odom0_relative: false
 
     ##### lidar rf2o odometry
-    odom1: odom_lidar_rf_fixed
+    odom1: odom_lidar_rf2o_fixed
     odom1_config:
       [
         false,false,false,
@@ -162,7 +162,7 @@ ekf_filter_node_map:
     odom0_relative: false
 
     ##### lidar rf2o odometry
-    odom1: odom_lidar_rf_fixed
+    odom1: odom_lidar_rf2o_fixed
     odom1_config:
       [
         false,false,false,
