@@ -4,12 +4,16 @@ lidar_horizontal:
     laser_scan_topic_name: 'lidar_horizontal/scan'
     point_cloud_2d_topic_name: 'pointcloud2d' # Leave this, won't work otherwise
     frame_id: 'lidar_horizontal_link'
-    port_name: '/dev/ttyUSB2'
+    port_name: '/dev/ttyUSB4'
     serial_baudrate: 230400 # Leave this, won't work otherwise
     laser_scan_dir: True
     enable_angle_crop_func: True
     angle_crop_min: 133.0
-    angle_crop_max: 227.0
+    angle_crop_max: 227.0 # 227.0-0.00944839883595705
+    range_min: 0.08
+    range_max: 8.0
+    beam_size: 666
+
 
 lidar_vertical_left:
   ros__parameters:
@@ -23,6 +27,9 @@ lidar_vertical_left:
     enable_angle_crop_func: True
     angle_crop_min: 180.0
     angle_crop_max: 360.0
+    range_min: 0.08
+    range_max: 8.0
+    beam_size: 666
 
 lidar_vertical_right:
   ros__parameters:
@@ -36,4 +43,7 @@ lidar_vertical_right:
     enable_angle_crop_func: True
     angle_crop_min: 0.0
     angle_crop_max: 180.0
+    range_min: 0.08
+    range_max: 8.0
+    beam_size: 666
 

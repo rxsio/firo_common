@@ -1,8 +1,7 @@
 #include <memory>
 #include <string>
 #include <vector>
-
-#include "nav_msgs/msg/odometry.hpp"
+#include <nav_msgs/msg/odometry.hpp>
 #include "rclcpp/rclcpp.hpp"
 
 /*

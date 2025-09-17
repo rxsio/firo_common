@@ -25,14 +25,14 @@ Parameter Description:
 
 def generate_launch_description():
 
-    # Lifecycle manager configuration file
+    # Configuration file
     lidar_params = os.path.join(
         get_package_share_directory('firo_navigation'),
         'config',
         'lidar_params.yaml'
     )
 
-    # LDROBOT LiDAR publisher node
+    # Lidar publisher node
     lidar_horizontal_node = Node(
         package='ldlidar_sl_ros2',
         executable='ldlidar_sl_ros2_node',
@@ -61,19 +61,19 @@ def generate_launch_description():
         executable='static_transform_publisher',
         name='base_to_lidar',
         output='screen',
-        arguments=['0.265', '0', '0.055', '0', '0', '0', 'torso', 'lidar_horizontal_link']
+        arguments=['0.24', '0', '0.055', '0', '0', '0', 'torso', 'lidar_horizontal_link']
     )
     base_to_lidar_left = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        name='base_to_imu',
+        name='base_to_lidar_left',
         output='screen',
         arguments=['-0.135', '0.2', '0.05','0', '0', '-1.5708', 'torso', 'lidar_vertical_left_link']
     )
     base_to_lidar_right = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        name='base_to_imu',
+        name='base_to_lidar_right',
         output='screen',
         arguments=['-0.135', '-0.2', '0.05','0', '0', '1.5708', 'torso', 'lidar_vertical_right_link']
     )
@@ -81,8 +81,8 @@ def generate_launch_description():
     # Define LaunchDescription variable
     ld = LaunchDescription()
     ld.add_action(lidar_horizontal_node)
-    ld.add_action(lidar_vertical_left_node)
-    ld.add_action(lidar_vertical_right_node)
+    #ld.add_action(lidar_vertical_left_node)
+    #ld.add_action(lidar_vertical_right_node)
     ld.add_action(base_to_lidar)
     ld.add_action(base_to_lidar_left)
     ld.add_action(base_to_lidar_right)

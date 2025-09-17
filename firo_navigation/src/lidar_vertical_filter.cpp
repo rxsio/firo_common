@@ -1,9 +1,8 @@
 #include <cmath>
 #include <limits>
 #include <memory>
-
+#include <sensor_msgs/msg/laser_scan.hpp>
 #include "rclcpp/rclcpp.hpp"
-#include "sensor_msgs/msg/laser_scan.hpp"
 /*
 This node filters scans from the vertical lidars in order to detect obstalce height that is lower than mast (threshold).
 
