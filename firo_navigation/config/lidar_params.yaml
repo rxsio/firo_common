@@ -4,7 +4,7 @@ lidar_horizontal:
     laser_scan_topic_name: 'lidar_horizontal/scan'
     point_cloud_2d_topic_name: 'pointcloud2d' # Leave this, won't work otherwise
     frame_id: 'lidar_horizontal_link'
-    port_name: '/dev/ttyUSB4'
+    port_name: '/dev/ttyUSB2'
     serial_baudrate: 230400 # Leave this, won't work otherwise
     laser_scan_dir: True
     enable_angle_crop_func: True

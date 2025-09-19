@@ -31,19 +31,16 @@ endif()
 add_executable(odometry_fixer_node src/odometry_fixer_node.cpp)
 add_executable(command_twist_stamper_node src/command_twist_stamper_node.cpp)
 add_executable(lidar_vertical_filter src/lidar_vertical_filter.cpp)
-add_executable(approach_pose_saver src/approach_pose_saver.cpp)
-add_executable(approach_pose src/approach_pose.cpp)
+add_executable(dock_approach_manager src/dock_approach_manager.cpp)
 
-target_link_libraries(approach_pose_saver yaml-cpp)
-target_link_libraries(approach_pose yaml-cpp)
+target_link_libraries(dock_approach_manager yaml-cpp)
 
 ament_target_dependencies(odometry_fixer_node rclcpp nav_msgs)
 ament_target_dependencies(command_twist_stamper_node rclcpp geometry_msgs action_msgs)
 ament_target_dependencies(lidar_vertical_filter rclcpp sensor_msgs)
-ament_target_dependencies(approach_pose_saver rclcpp nav_msgs yaml-cpp ament_index_cpp)
-ament_target_dependencies(approach_pose rclcpp geometry_msgs yaml-cpp ament_index_cpp)
+ament_target_dependencies(dock_approach_manager rclcpp  geometry_msgs  std_srvs  tf2_ros  tf2  yaml-cpp  ament_index_cpp)
 
-install(TARGETS odometry_fixer_node command_twist_stamper_node lidar_vertical_filter approach_pose_saver approach_pose DESTINATION lib/${PROJECT_NAME})
+install(TARGETS odometry_fixer_node command_twist_stamper_node lidar_vertical_filter dock_approach_manager DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
 

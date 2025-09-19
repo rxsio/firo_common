@@ -37,6 +37,15 @@ def generate_launch_description():
         name='twist_stamper_goal_stopper'
     )
 
+    # dock apporach pose manager node
+    dock_approach_manager = Node(
+        package='firo_navigation', 
+        executable='dock_approach_manager', 
+        name='dock_approach_manager',
+        output='screen',
+        respawn=True
+    )
+
     # nav2 nodes for lifecycle manager
     bt_navigator_node = Node(
         package='nav2_bt_navigator', 
@@ -170,6 +179,7 @@ def generate_launch_description():
     # launch nodes
     ld.add_action(localization_launch)
     ld.add_action(twist_stamper)
+    ld.add_action(dock_approach_manager)
     # launch nav2 nodes
     ld.add_action(bt_navigator_node)
     ld.add_action(behavior_server_node)
