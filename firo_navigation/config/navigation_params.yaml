@@ -465,7 +465,7 @@ local_costmap:
 
 map_server:
   ros__parameters:
-    yaml_filename: "workshop.yaml"
+    yaml_filename: "test_map.yaml"
     topic_name: "map"
     frame_id: "map"
     introspection_mode: "disabled"
