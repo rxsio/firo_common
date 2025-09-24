@@ -81,8 +81,8 @@ def generate_launch_description():
     # Define LaunchDescription variable
     ld = LaunchDescription()
     ld.add_action(lidar_horizontal_node)
-    #ld.add_action(lidar_vertical_left_node)
-    #ld.add_action(lidar_vertical_right_node)
+    ld.add_action(lidar_vertical_left_node)
+    ld.add_action(lidar_vertical_right_node)
     ld.add_action(base_to_lidar)
     ld.add_action(base_to_lidar_left)
     ld.add_action(base_to_lidar_right)
