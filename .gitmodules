@@ -1,0 +1,9 @@
+[submodule "rf2o_laser_odometry"]
+	path = rf2o_laser_odometry
+	url = https://github.com/Adlink-ROS/rf2o_laser_odometry.git
+[submodule "lidar_auto_docking"]
+	path = lidar_auto_docking
+	url = https://github.com/YoshidoSan/lidar_auto_docking.git
+[submodule "lidar_auto_docking_messages"]
+	path = lidar_auto_docking_messages
+	url = https://github.com/YoshidoSan/lidar_auto_docking_messages.git

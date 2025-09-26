@@ -1,0 +1,49 @@
+lidar_horizontal:
+  ros__parameters:
+    product_name: 'LDLiDAR_LD14P' # Leave this, won't work otherwise
+    laser_scan_topic_name: 'lidar_horizontal/scan'
+    point_cloud_2d_topic_name: 'pointcloud2d' # Leave this, won't work otherwise
+    frame_id: 'lidar_horizontal_link'
+    port_name: '/dev/lidar_horizontal'
+    serial_baudrate: 230400 # Leave this, won't work otherwise
+    laser_scan_dir: True
+    enable_angle_crop_func: True
+    angle_crop_min: 133.0
+    angle_crop_max: 227.0 # 227.0-0.00944839883595705
+    range_min: 0.08
+    range_max: 8.0
+    beam_size: 666
+
+
+lidar_vertical_left:
+  ros__parameters:
+    product_name: 'LDLiDAR_LD14P' # Leave this, won't work otherwise
+    laser_scan_topic_name: 'lidar_vertical_left/scan'
+    point_cloud_2d_topic_name: 'pointcloud2d' # Leave this, won't work otherwise
+    frame_id: 'lidar_vertical_left_link'
+    port_name: '/dev/lidar_left'
+    serial_baudrate: 230400 # Leave this, won't work otherwise
+    laser_scan_dir: True
+    enable_angle_crop_func: True
+    angle_crop_min: 180.0
+    angle_crop_max: 360.0
+    range_min: 0.08
+    range_max: 8.0
+    beam_size: 666
+
+lidar_vertical_right:
+  ros__parameters:
+    product_name: 'LDLiDAR_LD14P' # Leave this, won't work otherwise
+    laser_scan_topic_name: 'lidar_vertical_right/scan'
+    point_cloud_2d_topic_name: 'pointcloud2d' # Leave this, won't work otherwise
+    frame_id: 'lidar_vertical_right_link'
+    port_name: '/dev/lidar_right'
+    serial_baudrate: 230400 # Leave this, won't work otherwise
+    laser_scan_dir: True
+    enable_angle_crop_func: True
+    angle_crop_min: 0.0
+    angle_crop_max: 180.0
+    range_min: 0.08
+    range_max: 8.0
+    beam_size: 666
+
