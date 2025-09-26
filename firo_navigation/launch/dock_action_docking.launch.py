@@ -20,7 +20,7 @@ def generate_launch_description():
     dock_pose_file = "dock_pose.json"
 
     load_file_path = os.path.join(
-        get_package_share_directory("lidar_auto_docking"),
+        get_package_share_directory("firo_navigation"),
         "config",
         dock_pose_file,
     )
@@ -39,7 +39,7 @@ def generate_launch_description():
         executable="auto_dock",
         parameters=[config],
         output="screen",
-        remappings=[("/cmd_vel", "/autodock/cmd_vel")],
+        #remappings=[("/cmd_vel", "/autodock/cmd_vel")],
     )
     ld.add_action(run_autodock)
     ld.add_action(run_autodock_client)
